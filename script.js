@@ -23,11 +23,15 @@ const translations = {
   }
 };
 
+const STORAGE_KEY = "preferred-language-v2";
+const DEFAULT_LANGUAGE = "en";
+
 const navTargets = {
   zh: {
     navAbout: "#about",
     navNews: "#news",
     navPublications: "#publications",
+    navAwards: "#awards",
     navService: "#service",
     navEducation: "#education"
   },
@@ -35,6 +39,7 @@ const navTargets = {
     navAbout: "#about-en",
     navNews: "#news-en",
     navPublications: "#publications-en",
+    navAwards: "#awards-en",
     navService: "#service-en",
     navEducation: "#education-en"
   }
@@ -42,7 +47,7 @@ const navTargets = {
 
 const button = document.querySelector("[data-lang-toggle]");
 const blocks = document.querySelectorAll("[data-lang-content]");
-let currentLang = localStorage.getItem("preferred-language") || "zh";
+let currentLang = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANGUAGE;
 
 function applyLanguage(lang) {
   document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
@@ -57,7 +62,7 @@ function applyLanguage(lang) {
     }
   });
   button.textContent = lang === "zh" ? "EN" : "中文";
-  localStorage.setItem("preferred-language", lang);
+  localStorage.setItem(STORAGE_KEY, lang);
 }
 
 button.addEventListener("click", () => {
